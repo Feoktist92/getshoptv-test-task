@@ -5,13 +5,13 @@ import Keyboard from './components/Keyboard';
 import Success from './components/Success';
 import video from '../src/assets/video.mp4';
 
-const App = () => {
-    const videoRef = useRef(null);
+const App: React.FC = () => {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
     const [showBanner, setShowBanner] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
     const [isRequestSent, setIsRequestSent] = useState(false);
-    const [currentComponent, setCurrentComponent] = useState('');
-    const [currentBanner, setCurrentBanner] = useState('banner');
+    const [currentComponent, setCurrentComponent] = useState<string>('');
+    const [currentBanner, setCurrentBanner] = useState<string>('banner');
 
     useEffect(() => {
         const videoElement = videoRef.current;
@@ -20,11 +20,11 @@ const App = () => {
             setShowBanner(true);
         }, 5000);
 
-        videoElement.addEventListener('ended', () => {
+        videoElement?.addEventListener('ended', () => {
             setShowBanner(false);
         });
 
-        const handleKeyEscape = (e) => {
+        const handleKeyEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 if (
                     currentComponent === 'Keyboard' ||
@@ -36,14 +36,15 @@ const App = () => {
                         setCurrentBanner('banner');
                     }
                 }
-                videoElement.play();
+                videoElement?.play();
             }
         };
+
         window.addEventListener('keydown', handleKeyEscape);
 
         return () => {
             clearTimeout(bannerTimer);
-            videoElement.removeEventListener('ended', () => {
+            videoElement?.removeEventListener('ended', () => {
                 setShowBanner(false);
             });
             window.removeEventListener('keydown', handleKeyEscape);
@@ -51,7 +52,7 @@ const App = () => {
     }, [showOverlay, currentComponent, isRequestSent]);
 
     const handleOkClick = () => {
-        videoRef.current.pause();
+        videoRef.current?.pause();
         setCurrentComponent('Keyboard');
         setShowOverlay(true);
         if (!isRequestSent) {
@@ -61,11 +62,12 @@ const App = () => {
 
     const handleKeyboardSubmit = () => {
         setCurrentComponent('Success');
+        setShowOverlay(true);
         setIsRequestSent(true);
     };
 
     const handleOverlayClose = () => {
-        videoRef.current.play();
+        videoRef.current?.play();
         setCurrentComponent('');
         if (!isRequestSent) {
             setCurrentBanner('banner');
@@ -74,7 +76,7 @@ const App = () => {
 
     const handlePromoVideo = () => {
         if (currentComponent === 'Keyboard' && !isRequestSent) {
-            videoRef.current.play();
+            videoRef.current?.play();
             setCurrentComponent('');
             setCurrentBanner('banner');
         }
@@ -104,7 +106,7 @@ const App = () => {
                 </div>
             )}
             {showOverlay &&
-                (currentComponent === 'Keyboard' ? (
+                currentComponent === 'Keyboard' ? (
                     <Keyboard
                         onOverlayClick={() => setCurrentComponent('Success')}
                         handleKeyboardSubmit={handleKeyboardSubmit}
@@ -113,7 +115,7 @@ const App = () => {
                     />
                 ) : currentComponent === 'Success' ? (
                     <Success handleOverlayClose={handleOverlayClose} />
-                ) : null)}
+                ) : null}
         </div>
     );
 };
