@@ -1,0 +1,227 @@
+.root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 380px;
+    height: 100%;
+    padding: 70px 45px;
+    background-color: #86d3f4;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    color: #000;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 13px;
+}
+.input {
+    border: none;
+    color: #000;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #86d3f4;
+    max-width: 267px;
+    margin: 0 auto;
+    margin-bottom: 13px;
+}
+.text {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 33px;
+}
+.numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 284px;
+    gap: 10px;
+    margin-bottom: 33px;
+}
+.number,
+.clear,
+.focused {
+    display: flex;
+    padding: 12px 30px;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: 2px solid #000;
+    background-color: #86d3f4;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.focused {
+    background-color: #000;
+    color: #86d3f4;
+}
+.clear {
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+.clearFocused {
+    display: flex;
+    padding: 12px 30px;
+    align-items: center;
+    justify-content: center;
+    color: #86d3f4;
+    border: 2px solid #000;
+    background-color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+.spanFocused {
+    border: 2px solid black;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+    input {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        opacity: 0; /* Скрываем настоящий чекбокс */
+        z-index: 1; /* Устанавливаем z-index, чтобы метка могла быть нажата */
+        cursor: pointer;
+    }
+    span {
+        color: #565656;
+        font-size: 14px;
+        font-weight: 400;
+        margin-left: 35px;
+        max-width: 210px;
+    }
+    /* Стили для отображения прозрачного фона и галки */
+    input + span::before {
+        box-sizing: border-box;
+        content: ''; /* Пустой контент, будет использоваться для отображения галки */
+        display: block;
+        position: absolute;
+        margin-left: 5px;
+        top: 20px;
+        left: 25px;
+        transform: translate(-50%, -50%);
+        width: 40px; /* Увеличенная ширина галки */
+        height: 40px; /* Увеличенная высота галки */
+        border: 2px solid #000; /* Более толстая граница галки */
+        background-color: transparent;
+    }
+    input:checked + span::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 25px;
+        background-color: transparent;
+        background-image: url("data:image/svg+xml;utf8,<svg width='24' height='20' viewBox='0 0 24 20' xmlns='http://www.w3.org/2000/svg'><line x1='1.06066' y1='11.5659' x2='8.06066' y2='18.5659' stroke='black' stroke-width='3'/><line x1='6.2953' y1='18.5659' x2='22.9218' y2='1.93934' stroke='black' stroke-width='3'/></svg>");
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+}
+.disabled {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 284px;
+    height: 52px;
+    background-color: #86d3f4;
+    border: 1px solid #4e4e4e;
+    color: #4e4e4e;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.enabled {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 284px;
+    height: 52px;
+    background-color: #000;
+    border: 1px solid #4e4e4e;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.focusedEnabled {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 284px;
+    height: 52px;
+    background-color: rgb(18, 12, 186);
+    border: 1px solid #4e4e4e;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.closeBtn {
+    position: absolute;
+    width: 88px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #000;
+    transition: all 0.3s;
+}
+.focusedCloseBtn {
+    position: absolute;
+    width: 88px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    cursor: pointer;
+    border: 2px solid #000;
+    transition: all 0.3s;
+    background-color: #000;
+    svg {
+        stroke: white;
+    }
+}
+.closeBtn:hover {
+    background-color: #000;
+    svg {
+        stroke: white;
+    }
+}
+
+.errorText {
+    display: flex;
+    width: 284px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    color: #ea0000;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 13px;
+}

@@ -1,0 +1,50 @@
+.root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 380px;
+    height: 100%;
+    padding: 0 48px;
+    background-color: #86d3f4;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title {
+    max-width: 270px;
+    color: #000;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+.text {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+}
+.closeBtn {
+    position: absolute;
+    width: 88px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #000;
+    transition: all 0.3s;
+}
+.closeBtn:hover {
+    background-color: #000;
+    svg {
+        stroke: white;
+    }
+}
